@@ -9,7 +9,7 @@ This repository contains my custom add-ons for HAOS.
 
 This repository contains the following add-ons:
 
-### [Scrypted](./addon-scrypted)
+### [Scrypted](https://github.com/dshafik/haos-addon-scrypted)
 
 Add [Scrypted](https://www.scrypted.app) to HAOS
 

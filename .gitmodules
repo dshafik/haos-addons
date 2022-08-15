@@ -1,0 +1,3 @@
+[submodule "addon-scrypted"]
+	path = addon-scrypted
+	url = https://github.com/dshafik/haos-addon-scrypted.git
