@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Addons Auto-Update
+on:
+  schedule: 
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+jobs:
+  update-addons:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          submodules: true
+
+      - name: Update addons
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          for ADDON in addon-*
+          do
+            cd $ADDON
+            git fetch origin main
+            git checkout main
+            export MSG=`git log -1 --pretty=%B`
+            cd -
+            git add $ADDON
+            git commit --author="${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>" -m "[${ADDON}] ${MSG}"
+          done
+          git push origin main
+
+
